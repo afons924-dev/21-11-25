@@ -345,19 +345,35 @@ exports.aliexpressAuthCallback = onRequest(
 
       const REDIRECT_URI = "https://europe-west3-desire-loja-final.cloudfunctions.net/aliexpressAuthCallback";
 
-      // POST correto para criar token: form-encoded body
-      const params = new URLSearchParams({
-        client_id: APP_KEY,
-        client_secret: APP_SECRET,
+      // Build parameters for /rest/auth/token/create (TOP protocol)
+      const timestamp = Date.now().toString();
+      const paramsMap = {
+        app_key: APP_KEY,
+        timestamp: timestamp,
+        sign_method: "sha256",
         code: code,
-        grant_type: "authorization_code",
-        redirect_uri: REDIRECT_URI,
+      };
+
+      // For /rest/auth/token/create, the signature includes the API name prepended
+      const apiName = "/auth/token/create";
+      const sortedKeys = Object.keys(paramsMap).sort();
+      let signString = apiName;
+      sortedKeys.forEach((key) => {
+        signString += key + paramsMap[key];
+      });
+
+      const sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
+
+      const params = new URLSearchParams({
+        ...paramsMap,
+        sign: sign,
+        // Note: client_secret, grant_type, redirect_uri are NOT used in this endpoint,
+        // but some docs suggest they might be for other OAuth endpoints.
+        // For /rest/auth/token/create, we rely on TOP signature.
       });
 
       // Primary token endpoint used by many AliExpress docs
       const primaryTokenEndpoint = "https://api-sg.aliexpress.com/rest/auth/token/create";
-      // Fallback endpoint (some accounts/docs show a different path)
-      const fallbackTokenEndpoint = "https://api-sg.aliexpress.com/oauth/token";
 
       let tokenResponse;
       try {
@@ -366,16 +382,8 @@ exports.aliexpressAuthCallback = onRequest(
           timeout: 15000,
         });
       } catch (err) {
-        logger.warn("Primary token endpoint failed, trying fallback. Error:", err.response ? err.response.data : err.message);
-        try {
-          tokenResponse = await axios.post(fallbackTokenEndpoint, params.toString(), {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            timeout: 15000,
-          });
-        } catch (err2) {
-          logger.error("Both token exchange attempts failed:", err2.response ? err2.response.data : err2.message);
-          throw err2;
-        }
+        logger.error("Token exchange failed:", err.response ? err.response.data : err.message);
+        throw err;
       }
 
       const data = tokenResponse.data;
