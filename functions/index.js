@@ -498,12 +498,13 @@ exports.importAliExpressProduct = onCall(
         product_id: productId,
       };
 
-      // Parameters for signing (use 'session' instead of 'access_token')
+      // Parameters for signing (sign with 'access_token' to match request)
       const signParams = {
         ...params,
-        session: accessToken,
+        access_token: accessToken,
       };
 
+      // Sort parameters and append to signString (No API name prepend for Router endpoint)
       const signString = Object.keys(signParams)
         .sort()
         .map((key) => `${key}${signParams[key]}`)
@@ -511,10 +512,9 @@ exports.importAliExpressProduct = onCall(
 
       const sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
 
-      // Final query parameters: use 'access_token' for the wire, but 'sign' calculated with 'session'
+      // Final query parameters
       const requestParams = {
-        ...params,
-        access_token: accessToken,
+        ...signParams,
         sign: sign,
       };
 
