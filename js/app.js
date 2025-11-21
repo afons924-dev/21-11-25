@@ -1584,8 +1584,9 @@ const app = {
             imageWrapper.innerHTML = `
                 <img src="${url}" class="w-full h-24 object-cover" alt="Pré-visualização de imagem existente">
                 <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button type="button" title="Mover para trás" class="move-image-btn text-white hover:text-accent" data-index="${index}" data-direction="-1" ${index === 0 ? 'disabled style="opacity:0.3"' : ''}><i class="fas fa-arrow-left"></i></button>
                     <button type="button" title="Eliminar imagem" class="delete-existing-image-btn text-white hover:text-red-500" data-url="${url}"><i class="fas fa-trash"></i></button>
-                    ${!isMain ? `<button type="button" title="Definir como principal" class="set-main-image-btn text-white hover:text-accent" data-url="${url}"><i class="fas fa-star"></i></button>` : ''}
+                    <button type="button" title="Mover para frente" class="move-image-btn text-white hover:text-accent" data-index="${index}" data-direction="1" ${index === this.adminExistingImages.length - 1 ? 'disabled style="opacity:0.3"' : ''}><i class="fas fa-arrow-right"></i></button>
                 </div>
                 ${isMain ? '<div class="absolute top-1 right-1 bg-accent text-white text-xs px-1.5 py-0.5 rounded">Principal</div>' : ''}
             `;
@@ -1598,35 +1599,53 @@ const app = {
             imageWrapper.className = 'relative group border-2 border-dashed border-gray-500 rounded-md overflow-hidden';
             imageWrapper.innerHTML = `
                 <img src="${URL.createObjectURL(file)}" class="w-full h-24 object-cover" alt="Pré-visualização de novo ficheiro">
-                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button type="button" title="Mover para trás" class="move-image-btn text-white hover:text-accent" data-index="${index}" data-type="new" data-direction="-1" ${index === 0 ? 'disabled style="opacity:0.3"' : ''}><i class="fas fa-arrow-left"></i></button>
                     <button type="button" title="Remover ficheiro" class="delete-new-image-btn text-white hover:text-red-500" data-index="${index}"><i class="fas fa-times-circle"></i></button>
+                    <button type="button" title="Mover para frente" class="move-image-btn text-white hover:text-accent" data-index="${index}" data-type="new" data-direction="1" ${index === this.adminImageFiles.length - 1 ? 'disabled style="opacity:0.3"' : ''}><i class="fas fa-arrow-right"></i></button>
                 </div>
             `;
             galleryPreview.appendChild(imageWrapper);
         });
 
         // Add event listeners
-        document.querySelectorAll('.delete-existing-image-btn').forEach(btn => btn.addEventListener('click', (e) => {
-            const url = e.currentTarget.dataset.url;
-            this.adminExistingImages = this.adminExistingImages.filter(imgUrl => imgUrl !== url);
-            // TODO: In a real-world scenario, you might want to delete the file from Storage here,
-            // but that's complex as it might be used elsewhere. For now, we just unlink it from the product.
-            this.renderAdminImageGallery();
-        }));
+        // Use event delegation if not already attached
+        if (!galleryPreview.hasAttribute('data-listeners-attached')) {
+            galleryPreview.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
 
-        document.querySelectorAll('.delete-new-image-btn').forEach(btn => btn.addEventListener('click', (e) => {
-            const index = parseInt(e.currentTarget.dataset.index);
-            this.adminImageFiles.splice(index, 1);
-            this.renderAdminImageGallery();
-        }));
+                if (btn.classList.contains('delete-existing-image-btn')) {
+                    const url = btn.dataset.url;
+                    this.adminExistingImages = this.adminExistingImages.filter(imgUrl => imgUrl !== url);
+                    this.renderAdminImageGallery();
+                } else if (btn.classList.contains('delete-new-image-btn')) {
+                    const index = parseInt(btn.dataset.index);
+                    this.adminImageFiles.splice(index, 1);
+                    this.renderAdminImageGallery();
+                } else if (btn.classList.contains('set-main-image-btn')) {
+                    const url = btn.dataset.url;
+                    this.adminExistingImages = this.adminExistingImages.filter(imgUrl => imgUrl !== url);
+                    this.adminExistingImages.unshift(url);
+                    this.renderAdminImageGallery();
+                } else if (btn.classList.contains('move-image-btn')) {
+                    const index = parseInt(btn.dataset.index);
+                    const direction = parseInt(btn.dataset.direction);
+                    const type = btn.dataset.type; // 'existing' or 'new'
 
-        document.querySelectorAll('.set-main-image-btn').forEach(btn => btn.addEventListener('click', (e) => {
-            const url = e.currentTarget.dataset.url;
-            const oldMain = this.adminExistingImages[0];
-            this.adminExistingImages = this.adminExistingImages.filter(imgUrl => imgUrl !== url);
-            this.adminExistingImages.unshift(url);
-            this.renderAdminImageGallery();
-        }));
+                    const targetArray = type === 'new' ? this.adminImageFiles : this.adminExistingImages;
+                    const newIndex = index + direction;
+
+                    if (newIndex >= 0 && newIndex < targetArray.length) {
+                        const temp = targetArray[index];
+                        targetArray[index] = targetArray[newIndex];
+                        targetArray[newIndex] = temp;
+                        this.renderAdminImageGallery();
+                    }
+                }
+            });
+            galleryPreview.setAttribute('data-listeners-attached', 'true');
+        }
     },
 
     async initAdminOrdersPage() {

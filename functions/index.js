@@ -496,9 +496,9 @@ exports.importAliExpressProduct = onCall(
         timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
-        shpt_to: "PT",
+        ship_to_country: "PT",
         target_currency: "EUR",
-        target_language: "EN",
+        target_language: "en",
         v: "2.0",
         format: "json",
       };
@@ -519,7 +519,7 @@ exports.importAliExpressProduct = onCall(
 
       // Final query parameters
       const requestParams = {
-        ...signParams,
+        ...signParams, // Use signParams which has 'session'
         sign: sign,
       };
 
