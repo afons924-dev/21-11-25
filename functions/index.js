@@ -523,6 +523,7 @@ exports.importAliExpressProduct = onCall(
       // Log debug info
       const debugParams = { ...requestParams };
       if (debugParams.session) debugParams.session = "***";
+      // Redact session/access token from sign string for logging
       const debugSignString = signString.replace(accessToken, "***");
       logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
 
