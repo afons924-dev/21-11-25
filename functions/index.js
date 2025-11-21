@@ -506,6 +506,13 @@ exports.importAliExpressProduct = onCall(
 
       params.sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
 
+      // Log debug info for IncompleteSignature analysis
+      const debugParams = { ...params };
+      if (debugParams.access_token) debugParams.access_token = "***";
+      if (debugParams.session) debugParams.session = "***";
+      const debugSignString = signString.replace(accessToken, "***");
+      logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
+
       const response = await axios.get("https://api-sg.aliexpress.com/rest", { params, timeout: 15000 });
       const result = response.data.aliexpress_ds_product_get_response?.result || response.data.result || response.data.data?.result;
       if (!result) {
