@@ -495,7 +495,7 @@ exports.importAliExpressProduct = onCall(
         timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
-        session: accessToken,
+        access_token: accessToken,
       };
 
       // Assinatura: concatena chaves ordenadas + HMAC-SHA256 com APP_SECRET
