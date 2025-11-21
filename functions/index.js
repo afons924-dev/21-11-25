@@ -489,31 +489,42 @@ exports.importAliExpressProduct = onCall(
     }
 
     try {
+      // Parameters for the request
       const params = {
         app_key: APP_KEY,
         sign_method: "sha256",
         timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
-        access_token: accessToken,
       };
 
-      // Assinatura: concatena chaves ordenadas + HMAC-SHA256 com APP_SECRET
-      const signString = Object.keys(params)
+      // Parameters for signing (use 'session' instead of 'access_token')
+      const signParams = {
+        ...params,
+        session: accessToken,
+      };
+
+      const signString = Object.keys(signParams)
         .sort()
-        .map((key) => `${key}${params[key]}`)
+        .map((key) => `${key}${signParams[key]}`)
         .join("");
 
-      params.sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
+      const sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
 
-      // Log debug info for IncompleteSignature analysis
-      const debugParams = { ...params };
+      // Final query parameters: use 'access_token' for the wire, but 'sign' calculated with 'session'
+      const requestParams = {
+        ...params,
+        access_token: accessToken,
+        sign: sign,
+      };
+
+      // Log debug info
+      const debugParams = { ...requestParams };
       if (debugParams.access_token) debugParams.access_token = "***";
-      if (debugParams.session) debugParams.session = "***";
       const debugSignString = signString.replace(accessToken, "***");
       logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
 
-      const response = await axios.get("https://api-sg.aliexpress.com/rest", { params, timeout: 15000 });
+      const response = await axios.get("https://api-sg.aliexpress.com/rest", { params: requestParams, timeout: 15000 });
       const result = response.data.aliexpress_ds_product_get_response?.result || response.data.result || response.data.data?.result;
       if (!result) {
         logger.error("Error fetching product from AliExpress:", response.data);
