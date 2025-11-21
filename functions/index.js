@@ -492,7 +492,7 @@ exports.importAliExpressProduct = onCall(
       const params = {
         app_key: APP_KEY,
         sign_method: "sha256",
-        timestamp: new Date().toISOString(),
+        timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
         session: accessToken,
