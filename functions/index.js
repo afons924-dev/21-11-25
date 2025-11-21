@@ -496,12 +496,14 @@ exports.importAliExpressProduct = onCall(
         timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
+        v: "2.0",
+        format: "json",
       };
 
-      // Parameters for signing (sign with 'access_token' to match request)
+      // Parameters for signing (sign with 'session' to match TOP protocol)
       const signParams = {
         ...params,
-        access_token: accessToken,
+        session: accessToken,
       };
 
       // Sort parameters and append to signString (No API name prepend for Router endpoint)
@@ -520,7 +522,7 @@ exports.importAliExpressProduct = onCall(
 
       // Log debug info
       const debugParams = { ...requestParams };
-      if (debugParams.access_token) debugParams.access_token = "***";
+      if (debugParams.session) debugParams.session = "***";
       const debugSignString = signString.replace(accessToken, "***");
       logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
 
