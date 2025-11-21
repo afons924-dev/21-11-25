@@ -1,0 +1,113 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Coluna da Esquerda: Formulário -->
+    <div class="bg-primary p-6 rounded-lg shadow-lg sticky top-28 h-fit">
+        <h2 class="text-2xl font-bold mb-6" id="admin-form-title" data-i18n="addProductTitle">Adicionar Novo Produto</h2>
+        <form id="admin-product-form" novalidate="">
+            <input id="product-id" name="id" type="hidden" />
+            <input id="product-image-url" name="imageUrl" type="hidden" />
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-name" data-i18n="productNameLabel">Nome do Produto</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-name" name="name" required="" type="text" />
+                    <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-description" data-i18n="descriptionLabel">Descrição</label>
+                    <textarea class="w-full p-3 rounded-md form-input" id="product-description" name="description" required="" rows="4"></textarea>
+                    <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-price" data-i18n="priceLabel">Preço (€)</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-price" name="price" required="" step="0.01" type="number" />
+                    <p class="error-message">Insira um preço válido.</p>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-category" data-i18n="categoryLabel">Categoria</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-category" name="category" placeholder="Ex: para-ela, para-ele" required="" type="text" data-i18n-placeholder="categoryPlaceholder" />
+                    <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2" for="product-stock" data-i18n="stockLabel">Stock</label>
+                        <input class="w-full p-3 rounded-md form-input" id="product-stock" name="stock" required="" type="number" value="10">
+                        <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2" for="product-brand" data-i18n="brandLabel">Marca</label>
+                        <input class="w-full p-3 rounded-md form-input" id="product-brand" name="brand" type="text">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-color" data-i18n="colorLabel">Cor</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-color" name="color" type="text">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-material" data-i18n="materialLabel">Material</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-material" name="material" type="text">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-tags">Tags (separadas por vírgula)</label>
+                    <input class="w-full p-3 rounded-md form-input" id="product-tags" name="tags" type="text" placeholder="Ex: silencioso, potente, recarregável">
+                </div>
+
+                <!-- AliExpress Integration Input -->
+                <div>
+                     <label class="block text-gray-300 mb-2" for="product-aliexpress-url">ID do produto AliExpress</label>
+                     <input class="w-full p-3 rounded-md form-input" id="product-aliexpress-url" name="aliexpressUrl" type="text" placeholder="Opcional">
+                </div>
+
+                <!-- DROPZONE COMPLETA -->
+                <div>
+                    <label class="block text-gray-300 mb-2" for="product-image-file">Imagem do Produto</label>
+
+                    <div id="drop-zone" class="border-2 border-dashed border-gray-600 rounded-md p-4 mb-3 cursor-pointer text-center">
+                        <div class="flex items-center justify-center gap-4">
+                            <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l5-5 5 5M12 11v10" />
+                            </svg>
+                            <div>
+                                <div class="text-sm text-gray-300">Arraste imagens aqui ou clique para selecionar</div>
+                                <div class="text-xs text-gray-500">Suporta até 10 imagens · Máx 2MB cada</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input id="product-image-file" type="file" class="hidden" accept="image/*" multiple />
+
+                    <img id="product-image-preview" class="w-24 h-24 rounded-md hidden mt-2">
+
+                    <div id="image-gallery-preview" class="grid grid-cols-3 gap-2 mt-3"></div>
+                </div>
+
+                <div class="flex items-center">
+                    <input class="h-4 w-4 rounded border-gray-600 bg-gray-700 text-accent focus:ring-accent" id="product-show-urgency" name="showUrgency" type="checkbox" />
+                    <label class="ml-2 text-gray-300" for="product-show-urgency" data-i18n="showUrgencyLabel">Mostrar mensagem de "Poucas unidades!"</label>
+                </div>
+            </div>
+
+            <div class="mt-6 flex gap-4">
+                <button class="w-full btn btn-primary" type="submit" data-i18n="saveProductButton">Guardar Produto</button>
+                <button class="w-full btn btn-secondary" id="clear-form-btn" type="button" data-i18n="clearFormButton">Limpar</button>
+            </div>
+        </form>
+
+        <!-- AliExpress Integration Section -->
+        <div id="aliexpress-integration-section" class="mt-8 pt-8 border-t border-gray-700">
+            <!-- Content injected by JS -->
+        </div>
+    </div>
+
+    <!-- Coluna da Direita: Lista de Produtos -->
+    <div class="bg-primary p-6 rounded-lg shadow-lg h-fit">
+        <h2 class="text-2xl font-bold mb-6" data-i18n="productListTitle">Lista de Produtos</h2>
+        <div class="space-y-4 max-h-[70vh] overflow-y-auto" id="admin-product-list"></div>
+    </div>
+</div>

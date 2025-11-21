@@ -1,0 +1,23 @@
+<div class="mb-8">
+    <a href="#/products" class="text-gray-400 hover:text-accent transition-colors duration-300 flex items-center gap-2 w-fit">
+        <i class="fas fa-arrow-left"></i> Voltar aos produtos
+    </a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div class="relative" id="product-gallery">
+        <div class="aspect-w-1 aspect-h-1 w-full bg-secondary rounded-lg flex items-center justify-center mb-4">
+            <img id="main-product-image" src="{{product.image}}" alt="{{product.name}}" class="w-full h-full max-h-[500px] object-contain rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/800x800/1a1a1a/e11d48?text=Indisponível';this.alt='Imagem de produto indisponível.'" loading="lazy">
+        </div>
+        <div id="product-thumbnails" class="flex gap-2 justify-center overflow-x-auto p-2">
+            {{product.thumbnails}}
+        </div>
+    </div>
+    <div class="flex flex-col justify-center">
+        <h2 class="text-4xl font-extrabold text-white mb-3">{{product.name}}</h2>
+        <p class="text-gray-300 text-lg mb-6">{{product.description}}</p>
+        <span class="text-4xl font-bold text-accent mb-6">€{{product.price}}</span>
+        <button data-id="{{product.id}}" class="add-to-cart-btn w-full btn btn-primary flex items-center justify-center gap-2">
+            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+        </button>
+    </div>
+</div>

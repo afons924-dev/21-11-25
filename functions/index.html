@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- As meta tags abaixo serão atualizadas dinamicamente via JavaScript -->
+<title>Desire - Liberte as Suas Fantasias</title>
+<meta content="Explore uma coleção de luxo de brinquedos e acessórios para adultos, desenhados para o prazer e bem-estar. Compra segura e discreta na Desire." name="description"/>
+<meta content="sex shop, bem-estar íntimo, prazer, brinquedos para adultos, acessórios, desire, admin, dashboard" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://desire.pt/" rel="canonical"/>
+<!-- Open Graph / Facebook -->
+<meta content="website" property="og:type"/>
+<meta content="https://desire.pt/" property="og:url"/>
+<meta content="Desire - Liberte as Suas Fantasias" property="og:title"/>
+<meta content="Explore uma coleção de luxo de brinquedos e acessórios para adultos." property="og:description"/>
+<meta content="https://firebasestorage.googleapis.com/v0/b/desire-loja-final.firebasestorage.app/o/og-image.jpg?alt=media&amp;token=example" property="og:image"/>
+<!-- Twitter -->
+<meta content="summary_large_image" property="twitter:card"/>
+<meta content="https://desire.pt/" property="twitter:url"/>
+<meta content="Desire - Liberte as Suas Fantasias" property="twitter:title"/>
+<meta content="Explore uma coleção de luxo de brinquedos e acessórios para adultos." property="twitter:description"/>
+<meta content="https://firebasestorage.googleapis.com/v0/b/desire-loja-final.firebasestorage.app/o/og-image.jpg?alt=media&amp;token=example" property="twitter:image"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700;800&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZsQidJw2f/e47xJkA67z1rAFJmg8oA12Cg2R2U2eG/vP3wAB3w=="/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2NSFKWXG77"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      // A configuração do GTAG será chamada após o consentimento de cookies
+  </script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeJXJIrAAAAAMh4x_AG8ZJH_RmdIJ50MICzriCi"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="overflow-x-hidden">
+<div class="bg-secondary text-white text-center py-2 text-sm" id="shipping-message" data-i18n-html="shippingMessage">
+        🚚 Entrega estimada entre <strong>2 a 4 dias úteis</strong> com envio discreto.
+    </div>
+<header class="bg-primary/80 backdrop-blur-lg shadow-lg sticky top-0 z-30 border-b border-gray-800 relative">
+<div class="container mx-auto px-4">
+<div class="flex justify-between items-center py-2">
+<a aria-label="Desire Home Page" class="block" href="#/">
+<img alt="Desire Logo" class="h-16 w-auto" id="header-logo" loading="lazy" src="https://firebasestorage.googleapis.com/v0/b/desire-loja-final.firebasestorage.app/o/render.png?alt=media&token=9a79935b-a376-4441-8f09-e4e492fb32ce"/>
+</a>
+<nav aria-label="Main navigation" class="hidden md:flex items-center space-x-8" id="main-nav">
+<a class="nav-link text-lg" data-route="/" href="#/" data-i18n="navHome">Home</a>
+<a class="nav-link text-lg" data-route="/products" href="#/products" data-i18n="navProducts">Produtos</a>
+<a class="nav-link text-lg" data-route="/about" href="#/about" data-i18n="navAbout">Sobre Nós</a>
+<a class="nav-link text-lg" data-route="/contact" href="#/contact" data-i18n="navContact">Contactos</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle light/dark theme" class="text-gray-300 hover:text-accent transition" id="theme-toggle-btn" data-i18n-aria="ariaToggleTheme">
+    <i class="fas fa-moon text-xl" id="theme-icon-moon"></i>
+    <i class="fas fa-sun text-xl hidden" id="theme-icon-sun"></i>
+</button>
+<div class="relative">
+    <button aria-label="Change language" class="text-gray-300 hover:text-accent transition flex items-center" id="lang-switcher-btn">
+        <i class="fas fa-globe"></i>
+        <span class="ml-2 text-sm font-semibold" id="current-lang-text">PT</span>
+    </button>
+    <div class="absolute right-0 mt-2 w-28 bg-primary rounded-lg shadow-lg hidden" id="lang-dropdown">
+        <a href="#" class="block px-4 py-2 text-sm hover:bg-secondary" data-lang="pt">Português</a>
+        <a href="#" class="block px-4 py-2 text-sm hover:bg-secondary" data-lang="en">English</a>
+    </div>
+</div>
+<button aria-label="Abrir pesquisa" class="text-gray-300 hover:text-accent transition" id="search-icon" data-i18n-aria="ariaOpenSearch"><i class="fas fa-search text-xl"></i></button>
+<div class="flex items-center space-x-4" id="auth-container"></div>
+<button aria-label="Ver carrinho de compras" class="text-gray-300 hover:text-accent transition relative" id="cart-icon-container" data-i18n-aria="ariaViewCart">
+<i class="fas fa-shopping-cart text-xl"></i>
+<span aria-live="polite" class="absolute -top-2 -right-2 bg-accent text-white font-bold rounded-full h-5 w-5 flex items-center justify-center text-xs" id="cart-count" style="display: none;">0</span>
+</button>
+<button aria-expanded="false" aria-label="Abrir menu" class="md:hidden text-gray-300 hover:text-accent transition" id="mobile-menu-button" data-i18n-aria="ariaOpenMenu"><i class="fas fa-bars text-2xl"></i></button>
+</div>
+</div>
+</div>
+</header>
+<div aria-labelledby="mobile-menu-heading" aria-modal="true" class="fixed top-0 right-0 h-full w-64 bg-primary shadow-2xl z-[60] transform translate-x-full md:hidden transition-transform duration-300 ease-in-out" id="mobile-menu" role="dialog">
+<div class="flex justify-end p-4">
+<button aria-label="Fechar menu" class="text-gray-300 hover:text-accent transition" id="close-mobile-menu-button" data-i18n-aria="ariaCloseMenu"><i class="fas fa-times text-2xl"></i></button>
+</div>
+<nav aria-label="Mobile navigation" class="flex flex-col p-8 space-y-6">
+<h2 class="sr-only" id="mobile-menu-heading" data-i18n="mobileMenuTitle">Menu Principal</h2>
+<a class="nav-link text-lg" data-route="/" href="#/" data-i18n="navHome">Home</a>
+<a class="nav-link text-lg" data-route="/products" href="#/products" data-i18n="navProducts">Produtos</a>
+<a class="nav-link text-lg" data-route="/about" href="#/about" data-i18n="navAbout">Sobre Nós</a>
+<a class="nav-link text-lg" data-route="/contact" href="#/contact" data-i18n="navContact">Contactos</a>
+<div class="border-t border-gray-700 pt-4 mt-4" id="mobile-auth-container"></div>
+</nav>
+</div>
+<main id="app-root"></main>
+<footer aria-labelledby="footer-heading" class="bg-primary pt-16 pb-8 mt-24">
+<h2 class="sr-only" id="footer-heading">Footer</h2>
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div>
+<a aria-label="Desire Home Page" class="block mb-4" href="#/">
+<img alt="Desire Logo" class="h-12 w-auto" id="footer-logo" loading="lazy" src="https://firebasestorage.googleapis.com/v0/b/desire-loja-final.firebasestorage.app/o/render.png?alt=media&token=9a79935b-a376-4441-8f09-e4e492fb32ce"/>
+</a>
+<p class="text-gray-400" data-i18n="footerSlogan">A sua fonte de confiança para bem-estar e prazer íntimo. Explore com confiança.</p>
+<p class="text-green-400 font-medium mt-4 flex items-center bg-secondary p-3 rounded-lg" data-i18n-html="footerDiscrete"><i class="fas fa-shield-alt mr-2"></i> Embalagem 100% Discreta</p>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4" data-i18n="footerLegal">Legal</h3>
+<ul class="space-y-2">
+<li><a class="text-gray-400 hover:text-accent" href="#/terms" data-i18n="footerTerms">Termos e Condições</a></li>
+<li><a class="text-gray-400 hover:text-accent" href="#/privacy" data-i18n="footerPrivacy">Política de Privacidade</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4" data-i18n="footerSupport">Suporte</h3>
+<ul class="space-y-2">
+<li><a class="text-gray-400 hover:text-accent" href="#/contact" data-i18n="footerContact">Contacte-nos</a></li>
+<li><a class="text-gray-400 hover:text-accent" href="#/faq" data-i18n="footerFAQ">Perguntas Frequentes (FAQ)</a></li>
+<li><a class="text-gray-400 hover:text-accent" href="#/account" data-i18n="footerAccount">A Minha Conta</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4" data-i18n="footerConnect">Mantenha-se Conectado</h3>
+<p class="text-gray-400 mb-4" data-i18n="footerNewsletter">Receba ofertas exclusivas e novidades.</p>
+<form id="newsletter-form" novalidate="">
+<div class="flex">
+<label class="sr-only" for="newsletter-email" data-i18n="newsletterEmailPlaceholder">O seu Email</label>
+<input class="w-full bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-accent form-input" id="newsletter-email" placeholder="O seu Email" required="" type="email" data-i18n-placeholder="newsletterEmailPlaceholder"/>
+<button class="btn btn-primary px-4 rounded-l-none" type="submit" data-i18n="newsletterSubmit">Subscrever</button>
+</div>
+<p class="error-message" data-i18n="newsletterInvalidEmail">Por favor, insira um email válido.</p>
+</form>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm" data-i18n="footerCopyright">© 2025 Desire. Todos os Direitos Reservados.</p>
+<div class="flex space-x-4 mt-4 md:mt-0">
+<a aria-label="Visite o nosso Twitter" class="text-gray-500 hover:text-accent" href="https://twitter.com/desire_pt_loja" rel="noopener noreferrer" target="_blank"><i class="fab fa-twitter text-lg"></i></a>
+<a aria-label="Visite o nosso Instagram" class="text-gray-500 hover:text-accent" href="https://instagram.com/desire.pt" rel="noopener noreferrer" target="_blank"><i class="fab fa-instagram text-lg"></i></a>
+<a aria-label="Visite o nosso Facebook" class="text-gray-500 hover:text-accent" href="https://facebook.com/desire.portugal" rel="noopener noreferrer" target="_blank"><i class="fab fa-facebook text-lg"></i></a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Modals e Overlays -->
+<div aria-labelledby="search-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 z-40 hidden items-start justify-center pt-24 transition-opacity duration-300" id="search-overlay" role="dialog">
+<div class="relative w-full max-w-xl">
+<h2 class="sr-only" id="search-heading" data-i18n="searchModalTitle">Pesquisa de Produtos</h2>
+<label class="sr-only" for="search-input" data-i18n="searchInputLabel">Pesquisar produtos</label>
+<input class="w-full p-4 rounded-md form-input text-lg" id="search-input" placeholder="Pesquisar produtos..." type="text" data-i18n-placeholder="searchInputPlaceholder"/>
+<button aria-label="Fechar pesquisa" class="absolute top-1/2 right-4 -translate-y-1/2 text-gray-400 hover:text-white" id="close-search-btn" data-i18n-aria="searchClose"><i class="fas fa-times text-2xl"></i></button>
+</div>
+</div>
+<div aria-labelledby="preview-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[70] hidden items-center justify-center p-4 transition-opacity duration-300" id="preview-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto p-6 relative grid grid-cols-1 md:grid-cols-2 gap-6" id="preview-content"></div>
+</div>
+<div aria-labelledby="admin-order-modal-title" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[70] hidden items-center justify-center p-4 transition-opacity duration-300" id="admin-order-detail-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl w-11/12 max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative" id="admin-order-detail-content"></div>
+</div>
+<div aria-atomic="true" aria-live="assertive" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden items-center justify-center" id="loading-overlay">
+<div class="loader" role="status"><span class="sr-only" data-i18n="loading">A carregar...</span></div>
+</div>
+<div aria-labelledby="auth-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[70] hidden items-center justify-center p-4" id="auth-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl w-11/12 max-w-md relative p-8">
+<button aria-label="Fechar autenticação" class="absolute top-4 right-4 text-gray-400 hover:text-white" id="close-auth-modal" data-i18n-aria="authModalClose"><i class="fas fa-times text-2xl"></i></button>
+<div id="auth-content"></div>
+</div>
+</div>
+<div aria-labelledby="age-gate-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-90 z-[200] hidden items-center justify-center p-4 text-center" id="age-gate-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl p-8 max-w-md">
+<h2 class="text-4xl font-bold text-white mb-4" id="age-gate-heading" data-i18n-html="ageGateTitle">Bem-vindo à D<span class="text-accent">e</span>sire</h2>
+<p class="text-gray-300 mb-6" data-i18n="ageGateMessage">Este site contém conteúdo para adultos. Por favor, confirme que tem 18 anos ou mais para entrar.</p>
+<div class="flex justify-center gap-4">
+<button class="btn btn-primary" id="age-gate-enter" data-i18n="ageGateEnter">Tenho 18+ anos</button>
+<button class="btn btn-secondary" id="age-gate-exit" data-i18n="ageGateExit">Sair</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="confirmation-title" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[160] hidden items-center justify-center p-4" id="confirmation-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl p-8 max-w-sm text-center">
+<h2 class="text-2xl font-bold text-white mb-4" id="confirmation-title" data-i18n="confirmationTitle">Tem a certeza?</h2>
+<p class="text-gray-300 mb-6" id="confirmation-message" data-i18n="confirmationMessage">Esta ação não pode ser desfeita.</p>
+<div class="flex justify-center gap-4">
+<button class="btn btn-danger" id="confirm-action-btn" data-i18n="confirmAction">Confirmar</button>
+<button class="btn btn-secondary" id="cancel-action-btn" data-i18n="cancelAction">Cancelar</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-60 z-[80] hidden" id="cart-overlay"></div>
+<div aria-labelledby="cart-heading" aria-modal="true" class="fixed top-0 right-0 h-full w-full max-w-md bg-primary shadow-2xl z-[90] transform translate-x-full flex flex-col" id="cart-sidebar" role="dialog">
+<div class="flex items-center justify-between p-6 border-b border-gray-700">
+<h2 class="text-2xl font-bold" id="cart-heading" data-i18n="cartTitle">O seu Carrinho</h2>
+<button aria-label="Fechar carrinho" class="text-gray-400 hover:text-accent" id="close-cart-btn" data-i18n-aria="cartClose"><i class="fas fa-times text-2xl"></i></button>
+</div>
+<div class="flex-grow overflow-y-auto p-6" id="cart-sidebar-content"></div>
+<div class="p-6 border-t border-gray-700 bg-secondary" id="cart-sidebar-footer"></div>
+</div>
+<div aria-live="polite" id="toast-container" role="status"></div>
+<div aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[200] hidden items-center justify-center p-4 text-center" id="exit-intent-modal" role="dialog">
+<div class="bg-primary rounded-lg shadow-xl p-8 max-w-md relative transform transition-all scale-95 opacity-0">
+<button aria-label="Fechar" class="absolute top-2 right-3 text-gray-400 hover:text-white" id="close-exit-intent-modal"><i class="fas fa-times text-2xl"></i></button>
+<h2 class="text-4xl font-bold text-white mb-4" data-i18n="exitIntentTitle">Espere! Não vá já...</h2>
+<p class="text-gray-200 mb-6 text-lg" data-i18n-html="exitIntentMessage">Temos uma oferta especial para si. Use o cupão abaixo para ter <span class="text-accent font-bold">5% de desconto</span> na sua compra.</p>
+<div class="border-2 border-dashed border-accent bg-secondary p-4 rounded-lg mb-6"><span class="text-2xl font-bold tracking-widest">PRAZER5</span></div>
+<button class="btn btn-primary w-full" id="copy-coupon-btn" data-i18n="exitIntentButton">Copiar Cupão e Continuar</button>
+</div>
+</div>
+<div id="cookie-consent-banner">
+<p class="text-sm flex-grow" data-i18n-html="cookieBannerMessage">Este site utiliza cookies para garantir que obtém a melhor experiência. Ao continuar a navegar, concorda com a nossa <a class="font-bold underline hover:text-accent" href="#/privacy">Política de Privacidade</a>.</p>
+<div class="flex gap-2">
+<button class="btn btn-primary !py-2 !px-4 !text-sm" id="cookie-accept-btn" data-i18n="cookieAccept">Aceitar</button>
+<button class="btn btn-secondary !py-2 !px-4 !text-sm" id="cookie-decline-btn" data-i18n="cookieDecline">Recusar</button>
+</div>
+</div>
+
+<div id="bundle-modal-container"></div>
+
+<!-- Notify Me Modal -->
+<div aria-labelledby="notify-me-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[150] hidden items-center justify-center p-4" id="notify-me-modal" role="dialog">
+    <div class="bg-primary rounded-lg shadow-xl p-8 max-w-md w-full relative">
+        <button aria-label="Fechar" class="absolute top-2 right-3 text-gray-400 hover:text-white" id="close-notify-me-modal"><i class="fas fa-times text-2xl"></i></button>
+        <h2 class="text-2xl font-bold text-white mb-4" id="notify-me-heading">Notificar-me</h2>
+        <p class="text-gray-300 mb-6">Será notificado por email assim que este produto estiver novamente disponível.</p>
+        <div id="notify-me-content">
+            <!-- Content will be injected here by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<div class="fixed inset-0 bg-black bg-opacity-80 z-[300] hidden flex items-center justify-center p-4 text-center" id="first-visit-popup">
+<div class="bg-primary rounded-lg shadow-xl p-8 max-w-md">
+<h2 class="text-3xl font-bold text-white mb-4" data-i18n="firstVisitTitle">Bem-vindo à Desire!</h2>
+<p class="text-gray-300 mb-6" data-i18n-html="firstVisitMessage">Use o cupão abaixo e ganhe <span class="text-accent font-bold">10% de desconto</span> na sua primeira compra.</p>
+<div class="border-2 border-dashed border-accent bg-secondary p-4 rounded-lg mb-6">
+<span class="text-2xl font-bold tracking-widest">BEMVINDO10</span>
+</div>
+<button class="btn btn-primary w-full" id="close-welcome-popup-btn" data-i18n="firstVisitButton">Aproveitar Oferta</button>
+</div>
+</div>
+
+<!-- Flash Sale Modal -->
+<div aria-labelledby="flash-sale-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[150] hidden items-center justify-center p-4" id="flash-sale-modal" role="dialog">
+    <div class="bg-primary rounded-lg shadow-xl p-8 max-w-md w-full">
+        <h2 class="text-2xl font-bold text-white mb-4" id="flash-sale-heading" data-i18n="flashSaleModalTitle">Configurar Promoção Relâmpago</h2>
+        <form id="flash-sale-form" novalidate="">
+            <input type="hidden" id="flash-sale-product-id">
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2" for="flash-sale-discount" data-i18n="flashSaleDiscountLabel">Desconto (%)</label>
+                <input class="w-full p-3 rounded-md form-input" id="flash-sale-discount" name="discount" required type="number" min="1" max="99" placeholder="Ex: 20" data-i18n-placeholder="flashSaleDiscountPlaceholder">
+                <p class="error-message" data-i18n="flashSaleDiscountError">Insira um desconto válido (1-99).</p>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-300 mb-2" for="flash-sale-duration" data-i18n="flashSaleDurationLabel">Duração (horas)</label>
+                <input class="w-full p-3 rounded-md form-input" id="flash-sale-duration" name="duration" required type="number" min="1" placeholder="Ex: 24" data-i18n-placeholder="flashSaleDurationPlaceholder">
+                <p class="error-message" data-i18n="flashSaleDurationError">Insira uma duração válida.</p>
+            </div>
+            <div class="flex justify-end gap-4">
+                <button class="btn btn-secondary" id="cancel-flash-sale-btn" type="button" data-i18n="flashSaleCancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" data-i18n="flashSaleSave">Guardar Promoção</button>
+            </div>
+             <button class="btn btn-danger w-full mt-4" id="remove-flash-sale-btn" type="button" data-i18n="flashSaleRemove">Remover Promoção Atual</button>
+        </form>
+    </div>
+</div>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/351912345678" target="_blank" rel="noopener noreferrer" id="whatsapp-fab" aria-label="Contacte-nos no WhatsApp" class="bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center">
+    <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

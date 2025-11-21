@@ -1,0 +1,25 @@
+<div class="container mx-auto px-4 py-12">
+    <div class="text-center py-8">
+        <h2 class="text-4xl font-extrabold text-white" id="search-results-heading"></h2>
+        <p class="text-gray-400 mt-2" id="search-results-count"></p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Left Column: Filters -->
+        <aside class="lg:col-span-1">
+            <div class="bg-primary p-6 rounded-lg shadow-lg sticky top-28">
+                <h3 class="text-xl font-bold mb-4">Filtrar Por</h3>
+                <div id="search-filters-container" class="space-y-6">
+                    <!-- Dynamic filters will be injected here -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Column: Product Results -->
+        <main class="lg:col-span-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8" id="search-results-grid">
+                <!-- Search results will be inserted here -->
+            </div>
+            <div id="search-pagination-controls" class="flex justify-center items-center mt-12 space-x-2"></div>
+        </main>
+    </div>
+</div>

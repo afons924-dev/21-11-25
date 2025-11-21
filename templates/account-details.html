@@ -1,0 +1,29 @@
+<h2 class="text-2xl font-bold mb-6" data-i18n="accountDetailsTitle">Detalhes da Conta</h2>
+<form class="space-y-4" id="account-details-form" novalidate="">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-300 mb-2" for="detail-first-name" data-i18n="firstNameLabel">Primeiro Nome</label>
+            <input class="w-full p-3 rounded-md form-input" id="detail-first-name" name="firstName" required="" type="text"/>
+            <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+        </div>
+        <div>
+            <label class="block text-gray-300 mb-2" for="detail-last-name" data-i18n="lastNameLabel">Último Nome</label>
+            <input class="w-full p-3 rounded-md form-input" id="detail-last-name" name="lastName" required="" type="text"/>
+            <p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+        </div>
+    </div>
+    <div>
+        <label class="block text-gray-300 mb-2" for="detail-email" data-i18n="emailLabel">Email</label>
+        <input class="w-full p-3 rounded-md form-input" disabled="" id="detail-email" name="email" type="email"/>
+        <p class="text-sm text-gray-500 mt-1" data-i18n="emailCannotChange">O email não pode ser alterado.</p>
+    </div>
+    <button class="btn btn-primary" type="submit" data-i18n="saveChangesButton">Guardar Alterações</button>
+</form>
+
+<div class="mt-8 pt-6 border-t border-gray-700">
+    <h3 class="text-xl font-bold mb-4" data-i18n="privacyTitle">Privacidade e Dados</h3>
+    <p class="text-gray-400 mb-4" data-i18n="privacyMessage">Pode solicitar uma exportação de todos os seus dados pessoais armazenados no nosso site. Iremos fornecer um ficheiro JSON com as informações da sua conta e o seu histórico de encomendas.</p>
+    <button id="export-data-btn" class="btn btn-secondary">
+        <i class="fas fa-download mr-2"></i> <span data-i18n="exportDataButton">Descarregar os Meus Dados</span>
+    </button>
+</div>

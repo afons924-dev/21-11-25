@@ -1,0 +1,20 @@
+<h2 class="text-3xl font-bold text-center mb-6" id="auth-heading" data-i18n="registerTitle">Criar Conta</h2>
+<form id="register-form" novalidate="">
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="register-email" data-i18n="emailLabel">Email</label>
+<input autocomplete="email" class="w-full p-3 rounded-md form-input" id="register-email" name="email" required="" type="email"/>
+<p class="error-message" data-i18n="newsletterInvalidEmail">Por favor, insira um email válido.</p>
+</div>
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="register-password" data-i18n="passwordLabel">Palavra-passe</label>
+<input autocomplete="new-password" class="w-full p-3 rounded-md form-input" id="register-password" minlength="6" name="password" required="" type="password"/>
+<p class="error-message" data-i18n="registerPasswordError">A palavra-passe deve ter pelo menos 6 caracteres.</p>
+</div>
+<div class="mb-6">
+<input class="h-4 w-4 rounded border-gray-600 bg-gray-700 text-accent focus:ring-accent mr-2" id="register-terms" name="terms" required="" type="checkbox"/>
+<label class="text-sm text-gray-400" for="register-terms" data-i18n-html="registerTerms">Li e aceito os <a class="text-accent hover:underline" href="#/terms" rel="noopener noreferrer" target="_blank">Termos de Serviço</a> e a <a class="text-accent hover:underline" href="#/privacy" rel="noopener noreferrer" target="_blank">Política de Privacidade</a>.</label>
+<p class="error-message" data-i18n="registerAcceptError">Tem de aceitar os termos.</p>
+</div>
+<button class="w-full btn btn-primary" type="submit" data-i18n="registerButton">Registar</button>
+</form>
+<p class="text-center text-gray-400 mt-6" data-i18n-html="hasAccount">Já tem uma conta? <button class="font-semibold text-accent hover:underline" id="show-login-form" data-i18n="loginLink">Faça Login</button></p>

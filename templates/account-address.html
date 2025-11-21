@@ -1,0 +1,21 @@
+<h2 class="text-2xl font-bold mb-6" data-i18n="accountAddressTitle">Endereço de Envio</h2>
+<form class="space-y-4" id="account-address-form" novalidate="">
+<div>
+<label class="block text-gray-300 mb-2" for="address-line1" data-i18n="addressLabel">Morada</label>
+<input class="w-full p-3 rounded-md form-input" id="address-line1" name="address" required="" type="text"/>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-gray-300 mb-2" for="address-city" data-i18n="cityLabel">Cidade</label>
+<input class="w-full p-3 rounded-md form-input" id="address-city" name="city" required="" type="text"/>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+<div>
+<label class="block text-gray-300 mb-2" for="address-zip" data-i18n="zipLabel">Código Postal</label>
+<input class="w-full p-3 rounded-md form-input" id="address-zip" name="zip" required="" type="text"/>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+</div>
+<button class="btn btn-primary" type="submit" data-i18n="saveAddressButton">Guardar Endereço</button>
+</form>

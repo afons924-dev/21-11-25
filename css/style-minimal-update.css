@@ -1,0 +1,160 @@
+/* CSS MINIMALISTA - Apenas estilos para a seção About melhorada */
+/* NOTA: Este arquivo deve ser carregado DEPOIS do style.css principal */
+
+/* Estilos adicionais apenas para a nova seção About */
+.about-section {
+    /* Espaçamento melhorado */
+    padding: 80px 0;
+}
+
+.about-mission-card {
+    /* Cards com hover suave para a seção About */
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.about-mission-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent) !important;
+}
+
+.about-feature-icon {
+    /* Ícones redondos com cores do accent */
+    background-color: var(--color-accent);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.about-feature-icon i {
+    color: white;
+    font-size: 14px;
+}
+
+.about-stat-card {
+    /* Cards de estatísticas com hover */
+    text-align: center;
+    padding: 24px;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+}
+
+.about-stat-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.about-stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.about-stat-label {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.about-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.about-feature-content h4 {
+    color: var(--color-text);
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+}
+
+.about-feature-content p {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.about-mission-text {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.about-mission-title {
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+/* Grid responsivo para as estatísticas */
+.about-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* Layout principal da seção About */
+.about-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .about-content-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 60px 0;
+    }
+    
+    .about-content-grid {
+        gap: 32px;
+    }
+    
+    .about-mission-title {
+        font-size: 1.25rem;
+    }
+    
+    .about-stat-number {
+        font-size: 1.75rem;
+    }
+}
+
+/* Tema claro - se existir */
+html[data-theme='light'] .about-feature-content h4 {
+    color: var(--color-text);
+}
+
+html[data-theme='light'] .about-feature-content p {
+    color: var(--color-text-muted);
+}
+
+html[data-theme='light'] .about-mission-text {
+    color: var(--color-text-muted);
+}
+
+html[data-theme='light'] .about-stat-card {
+    background-color: var(--color-primary);
+}
+
+html[data-theme='light'] .about-stat-label {
+    color: var(--color-text-muted);
+}

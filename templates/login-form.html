@@ -1,0 +1,18 @@
+<h2 class="text-3xl font-bold text-center mb-6" id="auth-heading" data-i18n="loginTitle">Login</h2>
+<form id="login-form" novalidate="">
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="login-email" data-i18n="emailLabel">Email</label>
+<input autocomplete="email" class="w-full p-3 rounded-md form-input" id="login-email" name="email" required="" type="email"/>
+<p class="error-message" data-i18n="newsletterInvalidEmail">Por favor, insira um email válido.</p>
+</div>
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="login-password" data-i18n="passwordLabel">Palavra-passe</label>
+<input autocomplete="current-password" class="w-full p-3 rounded-md form-input" id="login-password" name="password" required="" type="password"/>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+<div class="text-right mb-6">
+<button class="text-sm text-accent hover:underline" id="forgot-password-btn" type="button" data-i18n="forgotPassword">Esqueceu-se da palavra-passe?</button>
+</div>
+<button class="w-full btn btn-primary" type="submit" data-i18n="loginButton">Entrar</button>
+</form>
+<p class="text-center text-gray-400 mt-6" data-i18n-html="noAccount">Não tem uma conta? <button class="font-semibold text-accent hover:underline" id="show-register-form" data-i18n="registerLink">Registe-se</button></p>

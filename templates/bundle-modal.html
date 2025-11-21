@@ -1,0 +1,30 @@
+<div aria-labelledby="bundle-heading" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-80 z-[150] flex items-center justify-center p-4" id="bundle-modal" role="dialog">
+    <div class="bg-primary rounded-lg shadow-xl p-8 max-w-2xl w-full">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-white" id="bundle-heading" data-i18n="bundleModalTitle">Gerir Bundle</h2>
+            <button id="close-bundle-modal-btn" class="text-gray-400 hover:text-white" aria-label="Fechar" data-i18n-aria="bundleModalClose"><i class="fas fa-times text-2xl"></i></button>
+        </div>
+        <form id="bundle-form" novalidate="">
+            <input type="hidden" id="bundle-product-id">
+            <div class="mb-4 bg-secondary p-4 rounded-lg">
+                <p class="text-gray-400" data-i18n="bundleMainProduct">Produto Principal:</p>
+                <h3 class="text-lg font-semibold text-accent" id="bundle-product-name"></h3>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2" for="bundle-products" data-i18n="bundleComplementaryProducts">Produtos Complementares (selecione para adicionar ao bundle)</label>
+                <div id="bundle-product-list" class="max-h-48 overflow-y-auto bg-secondary p-4 rounded-md border border-gray-600 space-y-2">
+                    <!-- Product checkboxes will be injected here -->
+                </div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-300 mb-2" for="bundle-discount" data-i18n="bundleDiscountLabel">Desconto do Bundle (%)</label>
+                <input class="w-full p-3 rounded-md form-input" id="bundle-discount" name="discount" required type="number" min="0" max="99" placeholder="Ex: 10" value="0" data-i18n-placeholder="bundleDiscountPlaceholder">
+                <p class="error-message" data-i18n="bundleDiscountError">Insira um desconto válido (0-99).</p>
+            </div>
+            <div class="flex justify-end gap-4">
+                <button class="btn btn-danger" id="remove-bundle-btn" type="button" data-i18n="bundleRemoveButton">Remover Bundle</button>
+                <button class="btn btn-primary" type="submit" data-i18n="bundleSaveButton">Guardar Bundle</button>
+            </div>
+        </form>
+    </div>
+</div>

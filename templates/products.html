@@ -1,0 +1,62 @@
+<div class="container mx-auto px-4 py-12">
+<div class="text-center py-12">
+<h2 class="text-5xl font-extrabold text-white" data-i18n="productsTitle">A Nossa Coleção</h2>
+<p class="text-gray-400 mt-2 text-lg" data-i18n="productsSubtitle">Descubra produtos selecionados para o seu máximo prazer.</p>
+</div>
+<section class="w-full flex-grow" id="product-content-area">
+<div class="bg-primary p-4 rounded-lg shadow-lg mb-8">
+<button class="accordion-header w-full flex justify-between items-center text-xl font-bold p-2">
+<span data-i18n="filters"><i class="fas fa-filter mr-3"></i> Filtros</span>
+<i class="fas fa-chevron-down transition-transform"></i>
+</button>
+<div class="accordion-body">
+<div class="pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 border-t border-gray-700">
+    <div class="lg:col-span-1">
+        <h4 class="font-semibold mb-3" data-i18n="categories">Categorias</h4>
+        <ul class="space-y-2" id="category-filter-list"></ul>
+    </div>
+    <div class="lg:col-span-1">
+        <h4 class="font-semibold mb-3" data-i18n="brand">Marca</h4>
+        <div class="space-y-2" id="brand-filter-list"></div>
+    </div>
+    <div class="lg:col-span-1">
+        <h4 class="font-semibold mb-3" data-i18n="color">Cor</h4>
+        <div class="space-y-2" id="color-filter-list"></div>
+    </div>
+    <div class="lg:col-span-1">
+        <h4 class="font-semibold mb-3" data-i18n="material">Material</h4>
+        <div class="space-y-2" id="material-filter-list"></div>
+    </div>
+    <div class="lg:col-span-1">
+        <h4 class="font-semibold mb-3" data-i18n="price">Preço</h4>
+        <div class="relative h-5 flex items-center price-slider-container">
+            <div class="absolute w-full h-1 bg-gray-600 rounded-full z-0"></div>
+            <div class="absolute h-1 bg-accent rounded-full z-1" id="price-range-track"></div>
+            <label class="sr-only" for="min-price-slider">Preço mínimo</label>
+            <input id="min-price-slider" type="range"/>
+            <label class="sr-only" for="max-price-slider">Preço máximo</label>
+            <input id="max-price-slider" type="range"/>
+        </div>
+        <div class="flex justify-between text-sm text-gray-400 mt-2">
+            <span id="min-price-display">€0</span>
+            <span id="max-price-display">€0</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mb-6 bg-secondary p-4 rounded-lg">
+<p aria-live="polite" class="text-gray-400" id="product-count"></p>
+<div class="flex items-center gap-2">
+<label class="text-gray-400" for="sort" data-i18n="sortBy">Ordenar por:</label>
+<select class="bg-gray-700 text-white rounded-md px-3 py-2 form-select focus:outline-none focus:ring-2 focus:ring-accent" id="sort">
+<option value="popularity" data-i18n="sortPopularity">Popularidade</option>
+<option value="price-asc" data-i18n="sortPriceAsc">Preço: Baixo para Alto</option>
+<option value="price-desc" data-i18n="sortPriceDesc">Preço: Alto para Baixo</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8" id="product-grid"></div>
+<div id="pagination-controls" class="flex justify-center items-center mt-12 space-x-2"></div>
+</section>
+</div>

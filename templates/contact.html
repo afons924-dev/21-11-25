@@ -1,0 +1,26 @@
+<div class="container mx-auto px-4 py-16">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-extrabold text-white" data-i18n="contactTitle">Entre em Contacto</h2>
+<p class="text-gray-400 mt-2" data-i18n="contactSubtitle">Tem alguma questão ou sugestão? Adoraríamos ouvir de si.</p>
+</div>
+<div class="max-w-2xl mx-auto bg-primary p-8 rounded-lg shadow-lg">
+<form id="contact-form" novalidate="">
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="name" data-i18n="contactNameLabel">Nome</label>
+<input class="w-full p-3 rounded-md form-input" id="name" name="name" required="" type="text"/>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="email" data-i18n="contactEmailLabel">Email</label>
+<input class="w-full p-3 rounded-md form-input" id="email" name="email" required="" type="email"/>
+<p class="error-message" data-i18n="newsletterInvalidEmail">Por favor, insira um email válido.</p>
+</div>
+<div class="mb-4">
+<label class="block text-gray-300 mb-2" for="message" data-i18n="contactMessageLabel">Mensagem</label>
+<textarea class="w-full p-3 rounded-md form-input" id="message" name="message" required="" rows="5"></textarea>
+<p class="error-message" data-i18n="fieldRequired">Campo obrigatório.</p>
+</div>
+<button class="w-full btn btn-primary" type="submit" data-i18n="contactSendButton">Enviar Mensagem</button>
+</form>
+</div>
+</div>
