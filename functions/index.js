@@ -496,7 +496,7 @@ exports.importAliExpressProduct = onCall(
         timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
-        ship_to_country: "PT",
+        shpt_to: "PT",
         target_currency: "EUR",
         target_language: "EN",
         v: "2.0",
