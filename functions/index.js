@@ -490,20 +490,17 @@ exports.importAliExpressProduct = onCall(
 
     try {
       // Parameters for the request
-      // Use yyyy-MM-dd HH:mm:ss format for timestamp
-      const d = new Date();
-      const timestamp = d.toISOString().replace('T', ' ').substring(0, 19);
-
       const params = {
         app_key: APP_KEY,
         sign_method: "sha256",
-        timestamp: timestamp,
+        timestamp: Date.now().toString(),
         method: "aliexpress.ds.product.get",
         product_id: productId,
         ship_to_country: "PT",
         target_currency: "EUR",
         target_language: "en",
         remove_personal_benefit: "false",
+        access_token: accessToken, // Explicitly add access_token as required by some endpoints
         v: "2.0",
         format: "json",
       };
