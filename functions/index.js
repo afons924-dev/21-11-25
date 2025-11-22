@@ -499,6 +499,7 @@ exports.importAliExpressProduct = onCall(
         ship_to_country: "PT",
         target_currency: "EUR",
         target_language: "en",
+        remove_personal_benefit: "false",
         v: "2.0",
         format: "json",
       };
@@ -517,7 +518,7 @@ exports.importAliExpressProduct = onCall(
 
       const sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
 
-      // Final query parameters
+      // Final request parameters
       const requestParams = {
         ...signParams, // Use signParams which has 'session'
         sign: sign,
@@ -530,7 +531,15 @@ exports.importAliExpressProduct = onCall(
       const debugSignString = signString.replace(accessToken, "***");
       logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
 
-      const response = await axios.get("https://api-sg.aliexpress.com/rest", { params: requestParams, timeout: 15000 });
+      // Use POST for better compatibility with TOP protocol parameters
+      const response = await axios.post(
+        "https://api-sg.aliexpress.com/rest",
+        new URLSearchParams(requestParams).toString(),
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          timeout: 15000,
+        }
+      );
       const result = response.data.aliexpress_ds_product_get_response?.result || response.data.result || response.data.data?.result;
       if (!result) {
         logger.error("Error fetching product from AliExpress:", response.data);
