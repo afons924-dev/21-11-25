@@ -490,10 +490,14 @@ exports.importAliExpressProduct = onCall(
 
     try {
       // Parameters for the request
+      // Use yyyy-MM-dd HH:mm:ss format for timestamp
+      const d = new Date();
+      const timestamp = d.toISOString().replace('T', ' ').substring(0, 19);
+
       const params = {
         app_key: APP_KEY,
         sign_method: "sha256",
-        timestamp: Date.now().toString(),
+        timestamp: timestamp,
         method: "aliexpress.ds.product.get",
         product_id: productId,
         ship_to_country: "PT",
@@ -542,7 +546,7 @@ exports.importAliExpressProduct = onCall(
       );
       const result = response.data.aliexpress_ds_product_get_response?.result || response.data.result || response.data.data?.result;
       if (!result) {
-        logger.error("Error fetching product from AliExpress:", response.data);
+        logger.error("Error fetching product from AliExpress (Full Response):", JSON.stringify(response.data));
         throw new HttpsError("not-found", "Could not retrieve product details from AliExpress.");
       }
 
