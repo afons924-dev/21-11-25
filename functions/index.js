@@ -505,10 +505,9 @@ exports.importAliExpressProduct = onCall(
         format: "json",
       };
 
-      // Parameters for signing (sign with 'session' to match TOP protocol)
+      // Parameters for signing (Do not add session, use access_token from params)
       const signParams = {
         ...params,
-        session: accessToken,
       };
 
       // Sort parameters and append to signString (No API name prepend for Router endpoint)
