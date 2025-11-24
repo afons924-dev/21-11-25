@@ -500,14 +500,14 @@ exports.importAliExpressProduct = onCall(
         target_currency: "EUR",
         target_language: "en",
         remove_personal_benefit: "false",
-        access_token: accessToken, // Explicitly add access_token as required by some endpoints
         v: "2.0",
         format: "json",
       };
 
-      // Parameters for signing (Do not add session, use access_token from params)
+      // Parameters for signing (sign with 'session' to match TOP protocol)
       const signParams = {
         ...params,
+        session: accessToken,
       };
 
       // Sort parameters and append to signString (No API name prepend for Router endpoint)
@@ -533,7 +533,7 @@ exports.importAliExpressProduct = onCall(
 
       // Use POST for better compatibility with TOP protocol parameters
       const response = await axios.post(
-        "https://api-sg.aliexpress.com/rest",
+        "https://api-sg.aliexpress.com/router/rest",
         new URLSearchParams(requestParams).toString(),
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
