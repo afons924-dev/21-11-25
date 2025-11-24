@@ -510,11 +510,15 @@ exports.importAliExpressProduct = onCall(
         session: accessToken,
       };
 
-      // Sort parameters and append to signString (No API name prepend for Router endpoint)
-      const signString = Object.keys(signParams)
-        .sort()
-        .map((key) => `${key}${signParams[key]}`)
-        .join("");
+      // Sort parameters and append to signString
+      // For /rest endpoint, usually the API method name is prepended to the signature string
+      // similar to the auth endpoint.
+      const apiName = "aliexpress.ds.product.get";
+      const sortedKeys = Object.keys(signParams).sort();
+      let signString = apiName;
+      sortedKeys.forEach((key) => {
+        signString += key + signParams[key];
+      });
 
       const sign = crypto.createHmac("sha256", APP_SECRET).update(signString).digest("hex").toUpperCase();
 
@@ -532,8 +536,9 @@ exports.importAliExpressProduct = onCall(
       logger.info("AliExpress Request Debug:", { debugParams, debugSignString });
 
       // Use POST for better compatibility with TOP protocol parameters
+      // Revert to /rest as /router/rest caused InvalidApiPath
       const response = await axios.post(
-        "https://api-sg.aliexpress.com/router/rest",
+        "https://api-sg.aliexpress.com/rest",
         new URLSearchParams(requestParams).toString(),
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
